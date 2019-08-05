@@ -1,0 +1,22 @@
+def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        temp_str = []      
+        openParentheses = ["(","[","{"]
+        combineParentheses = ["()","[]","{}"]
+        for cha in s:
+            if cha in openParentheses:       
+                temp_str.append(cha)
+            else:
+                if not temp_str:       
+                    return False
+                else:
+                    temp_cha = temp_str.pop() + cha     
+                    if temp_cha not in combineParentheses:
+                        return False
+        if not temp_str:     
+            return True
+        else:
+            return False
