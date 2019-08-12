@@ -1,0 +1,7 @@
+class Solution:
+    def singleNumber(self, array):
+        taglist=[]
+        for i in array:
+            if array.count(i)==1 and i not in taglist:
+                taglist.append(i)
+        return taglist
