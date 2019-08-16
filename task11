@@ -1,0 +1,22 @@
+class Solution(object):
+    def maxPathSum(self, root):
+        self.max=root.val
+        def maxandcontri(node):
+            contri_conds=[node.val]
+            max_res=node.val
+            addtoright=node.val
+            maxofmax_conds=[]
+            if node.left:
+                max_left,contri_left=maxandcontri(node.left)
+                maxofmax_conds.append(max_left)
+                contri_conds.append(contri_left+node.val)
+                max_res=max(node.val,contri_left,contri_left+node.val)
+                addtoright=max(node.val,contri_left+node.val)
+            if node.right:
+                max_right,contri_right=maxandcontri(node.right)
+                maxofmax_conds.append(max_right)
+                contri_conds.append(contri_right+node.val)
+                max_res=max(max_res,contri_right,addtoright+contri_right)
+            contribution=max(contri_conds)
+            return max([max_res]+maxofmax_conds),contribution
+        return maxandcontri(root)[0]
