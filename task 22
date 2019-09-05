@@ -1,0 +1,24 @@
+class Solution:
+    def search(self, nums, target):
+        """
+        :param nums: List[int]
+        :param target: int
+        :return: int
+        """
+        def search(nums, low, high, target):
+            if low > high:
+                return -1
+            mid = low + (high-low) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[mid] < nums[high]:
+                if nums[mid] < target <= nums[high]:
+                    return search(nums, mid+1, high, target)
+                else:
+                    return search(nums, low, mid-1, target)
+            else:
+                if nums[low] <= target < nums[mid]:
+                    return search(nums, low, mid-1, target)
+                else:
+                    return search(nums, mid+1, high, target)
+        return search(nums, 0, len(nums)-1, target)
