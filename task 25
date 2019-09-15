@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class SpiralOrder_54_middle {
+    public static void main(String[] args) {
+        int[][] matrix={};
+        List<Integer> list=solution(matrix);
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.print(list.get(i)+"   ");
+        }
+    }
+    public static List<Integer> solution(int[][] matrix){
+        List<Integer> result=new ArrayList<>();
+        int m=matrix.length;
+        if (m==0) return result;
+        int n=matrix[0].length;//m行，n列
+        boolean[][] flags=new boolean[m][n];
+        int point[]=isok(flags);
+        int x=point[0];
+        int y=point[1];
+        while (x!=-1&&y!=-1){
+            result.add(matrix[x][y]);
+            flags[x][y]=true;
+            while (y+1<n&&flags[x][y+1]==false){
+                y=y+1;
+                result.add(matrix[x][y]);
+                flags[x][y]=true;
+            }
+            while (x+1<m&&flags[x+1][y]==false){
+                x=x+1;
+                result.add(matrix[x][y]);
+                flags[x][y]=true;
+            }
+            while (y-1>=0&&flags[x][y-1]==false){
+                y=y-1;
+                result.add(matrix[x][y]);
+                flags[x][y]=true;
+            }
+            while (x-1>=0&&flags[x-1][y]==false){
+                x=x-1;
+                result.add(matrix[x][y]);
+                flags[x][y]=true;
+            }
+            x=isok(flags)[0];
+            y=isok(flags)[1];
+        }
+        return result;
+    }
+    public static int[] isok(boolean[][] flags){
+        //判断是不是所有的数据都输出完了
+        int[] result={-1,-1};
+        first:for (int i = 0; i <flags.length ; i++) {
+            for (int j = 0; j <flags[i].length ; j++) {
+                if (flags[i][j]==false){
+                    result[0]=i;
+                    result[1]=j;
+                    break  first;
+                }
+            }
+        }
+        return result;
+    }
+}
