@@ -1,0 +1,27 @@
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        n1 = 0
+        n2 = 0
+        i1 = 1
+        i2 = 1
+        while l1 != None:
+            n1 += l1.val * i1
+            l1 = l1.next
+            i1 *= 10
+        while l2 != None:
+            n2 += l2.val * i2
+            l2 = l2.next
+            i2 *= 10
+        target = n1 + n2
+        target = str(target)
+        result = ListNode(target[0])
+        for i in range(1,len(target)):
+            tmp = result
+            result = ListNode(target[i])
+            result.next = tmp
+        return result
