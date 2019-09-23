@@ -1,0 +1,16 @@
+def detectCycle(self, head):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    """
+    s = set()
+    # count = 0
+    while head:
+        if head in s:
+            return head
+        s.add(head)
+        # s[head] = count
+        # print(s)
+        # count+=1
+        head = head.next
+    return None
